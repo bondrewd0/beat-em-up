@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bjjypswtnu6u2"]
+
+[ext_resource type="Script" uid="uid://c02v5lx18atpj" path="res://Scenes/admin.gd" id="1_mynlb"]
+
+[node name="Admin" type="Node2D"]
+process_mode = 3
+script = ExtResource("1_mynlb")
