@@ -3,6 +3,10 @@ extends CharacterBody2D
 @onready var sprite: AnimatedSprite2D = $Sprite
 @onready var attack_timer: Timer = $AttackTimer
 
+@onready var attack_1: Area2D = $Attackcolliders/Attack1
+@onready var attack_2: Area2D = $Attackcolliders/Attack2
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+
 @export var Speed:float=10
 var can_move:bool=true
 var can_attack:bool=true
@@ -12,7 +16,7 @@ var attack_counter:int=0
 var load_next_attack:bool=false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	sprite.animation_changed.connect(_on_sprite_animation_changed)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -28,14 +32,19 @@ func _input(event: InputEvent) -> void:
 	if can_move:
 		if horizontal_movement==-1:
 			sprite.flip_h=true
+			attack_1.position=Vector2(-25.5,1.5)
+			attack_2.position=Vector2(-32,-10.5)
 		if horizontal_movement==1:
 			sprite.flip_h=false
+			attack_1.position=Vector2(32,1.5)
+			attack_2.position=Vector2(23,-10.5)
 		if horizontal_movement!=0 or vertical_movement!=0:
+			if load_next_attack:
+				load_next_attack=false
 			sprite.play("Walk")
 		else:
 			sprite.play("Idle")
 	if event.is_action_pressed("Attack") and not can_attack:
-		print("Loading")
 		load_next_attack=true
 	if event.is_action_pressed("Attack") and can_attack:
 		can_move=false
@@ -52,9 +61,7 @@ func _input(event: InputEvent) -> void:
 
 func _on_sprite_animation_finished() -> void:
 	if sprite.animation=="Attack1":
-		print("attack finished")
 		if load_next_attack:
-			print("playing")
 			sprite.play("Attack2")
 			attack_counter=0
 			attack_timer.start()
@@ -74,7 +81,6 @@ func _on_sprite_animation_finished() -> void:
 			attack_timer.start()
 			load_next_attack=false
 			return
-		print("attack finished")
 		can_move=true
 		can_attack=true
 		if vertical_movement==0 and horizontal_movement==0:
@@ -85,5 +91,11 @@ func _on_sprite_animation_finished() -> void:
 		attack_counter=0
 
 func _on_attack_timer_timeout() -> void:
-	print("Done")
 	attack_counter=0
+
+
+func _on_sprite_animation_changed() -> void:
+	if sprite.animation=="Attack1":
+		animation_player.play("TriggerAttack1")
+	if sprite.animation=="Attack2":
+		animation_player.play("TriggerAttack2")
