@@ -1,5 +1,5 @@
 extends CharacterBody2D
-
+class_name Player
 @onready var sprite: AnimatedSprite2D = $Sprite
 @onready var attack_timer: Timer = $AttackTimer
 
@@ -40,8 +40,7 @@ func _input(event: InputEvent) -> void:
 	horizontal_movement=Input.get_axis("Left","Right")
 	if event.is_action_pressed("Test"):
 		print("Testing")
-		apply_knockback(Vector2(1,0),100,0.2)
-		take_damage(5,self)
+		apply_knockback(Vector2(-1,0),100,0.2)
 		print("Testing complete")
 	if can_move:
 		if horizontal_movement==-1:
@@ -115,6 +114,9 @@ func _on_sprite_animation_changed() -> void:
 		animation_player.play("TriggerAttack2")
 
 func take_damage(damage:int, source:Node2D):
+	var hit_dir=(global_position-source.global_position).normalized()
+	apply_knockback(hit_dir,50,0.2)
+	print("dir: ",hit_dir)
 	HealthPoints-=damage
 	if HealthPoints<=0:
 		player_dead.emit()
@@ -152,5 +154,5 @@ func get_knocked(delta:float):
 			#print("knock done")
 
 func interrupt():
-	animation_player.play("RESET")
+	animation_player.call_deferred("play","RESET")
 	sprite.stop()

@@ -6,3 +6,4 @@ var first_level=preload("res://Scenes/level.tscn")
 func _ready() -> void:
 	var level_inst=first_level.instantiate()
 	add_child(level_inst)
+	

@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://dagwl50mytxjc"]
+[gd_scene load_steps=58 format=3 uid="uid://dagwl50mytxjc"]
 
 [ext_resource type="Script" uid="uid://dmyou1kcgvcq4" path="res://Scripts/playerController.gd" id="1_vgqql"]
 [ext_resource type="Texture2D" uid="uid://3whd42hwlm4x" path="res://Assets/CharacterSprites/Player/_Run.png" id="2_cvnsp"]
@@ -400,6 +400,9 @@ _data = {
 &"TriggerAttack2": SubResource("Animation_3smsa")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8erm5"]
+size = Vector2(20, 17.5)
+
 [node name="Player" type="CharacterBody2D"]
 scale = Vector2(2, 2)
 collision_mask = 2
@@ -451,6 +454,16 @@ libraries = {
 
 [node name="Sfx" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_x3wgy")
+
+[node name="HitBox" type="Area2D" parent="."]
+position = Vector2(10.5, -20.5)
+collision_layer = 4
+collision_mask = 64
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(-7, -1.5)
+shape = SubResource("RectangleShape2D_8erm5")
+debug_color = Color(1.97336e-06, 0.643614, 0.296762, 0.42)
 
 [connection signal="animation_finished" from="Sprite" to="." method="_on_sprite_animation_finished"]
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
