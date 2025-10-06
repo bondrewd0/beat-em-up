@@ -8,12 +8,14 @@ extends CharacterBody2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 @export var Speed:float=10
+@export var HealthPoints:int=10
 var can_move:bool=true
 var can_attack:bool=true
 var vertical_movement:float=0.0
 var horizontal_movement:float=0.0
 var attack_counter:int=0
 var load_next_attack:bool=false
+signal player_dead
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	sprite.animation_changed.connect(_on_sprite_animation_changed)
@@ -29,6 +31,8 @@ func _process(delta: float) -> void:
 func _input(event: InputEvent) -> void:
 	vertical_movement=Input.get_axis("Up","Down")
 	horizontal_movement=Input.get_axis("Left","Right")
+	if event.is_action_pressed("Test"):
+		pass
 	if can_move:
 		if horizontal_movement==-1:
 			sprite.flip_h=true
@@ -99,3 +103,8 @@ func _on_sprite_animation_changed() -> void:
 		animation_player.play("TriggerAttack1")
 	if sprite.animation=="Attack2":
 		animation_player.play("TriggerAttack2")
+
+func take_damage(damage:int, source:Node2D):
+	HealthPoints-=damage
+	if HealthPoints<=0:
+		player_dead.emit()

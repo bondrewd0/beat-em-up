@@ -1,0 +1,55 @@
+[gd_scene load_steps=5 format=3 uid="uid://c2hhq5i1ke7ek"]
+
+[ext_resource type="FontFile" uid="uid://c028ao3j0lp6a" path="res://Assets/Fonts/Merchant Copy.ttf" id="1_ccovl"]
+[ext_resource type="PackedScene" uid="uid://dsr32av7bnpae" path="res://Scenes/MenuButton.tscn" id="1_gryuy"]
+[ext_resource type="Theme" uid="uid://duhylbv7ogrcf" path="res://Assets/Themes/ButtonTheme.tres" id="1_r18jl"]
+
+[sub_resource type="Theme" id="Theme_1bamb"]
+default_font = ExtResource("1_ccovl")
+
+[node name="Credits" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 2
+color = Color(0.482353, 0.337255, 0.25098, 1)
+
+[node name="Items" type="RichTextLabel" parent="Background"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 214.0
+offset_right = -412.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_1bamb")
+theme_override_font_sizes/normal_font_size = 25
+text = "-Tileset by Szadi art on itch.io
+
+-Player sprite by aamatniekss on itch.io
+
+-Background by oisougabo"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 500
+
+[node name="Credits" type="RichTextLabel" parent="VBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+theme = ExtResource("1_r18jl")
+theme_override_font_sizes/normal_font_size = 75
+text = "Credits:"
+scroll_active = false
+autowrap_mode = 0
+
+[node name="Button" parent="VBoxContainer" instance=ExtResource("1_gryuy")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+Next_screen = "uid://ro1o63ixu7ag"

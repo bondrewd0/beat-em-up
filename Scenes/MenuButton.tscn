@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://dsr32av7bnpae"]
+
+[ext_resource type="Theme" uid="uid://duhylbv7ogrcf" path="res://Assets/Themes/ButtonTheme.tres" id="1_j7qw7"]
+[ext_resource type="Script" uid="uid://drlhg2hbl5qdu" path="res://Scenes/menu_button.gd" id="2_fcjks"]
+
+[node name="Button" type="Button"]
+offset_right = 87.0
+offset_bottom = 34.0
+theme = ExtResource("1_j7qw7")
+text = "Return"
+script = ExtResource("2_fcjks")

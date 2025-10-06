@@ -1,0 +1,8 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://duhylbv7ogrcf"]
+
+[ext_resource type="FontFile" uid="uid://c028ao3j0lp6a" path="res://Assets/Fonts/Merchant Copy.ttf" id="2_k558t"]
+
+[resource]
+default_font = ExtResource("2_k558t")
+Button/font_sizes/font_size = 37
+Button/fonts/font = ExtResource("2_k558t")
