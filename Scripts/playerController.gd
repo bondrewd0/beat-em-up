@@ -9,12 +9,16 @@ extends CharacterBody2D
 
 @export var Speed:float=10
 @export var HealthPoints:int=10
+var knckback:Vector2=Vector2.ZERO
+var timeknockback=0.0
 var can_move:bool=true
 var can_attack:bool=true
 var vertical_movement:float=0.0
 var horizontal_movement:float=0.0
 var attack_counter:int=0
 var load_next_attack:bool=false
+var can_be_knocked:bool=true
+var dead:bool=false
 signal player_dead
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -25,14 +29,20 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	var direction=Vector2(horizontal_movement,vertical_movement)
 	velocity=direction*Speed
+	if timeknockback>0.0:
+		get_knocked(delta)
 	if can_move:
 		move_and_slide()
+
 
 func _input(event: InputEvent) -> void:
 	vertical_movement=Input.get_axis("Up","Down")
 	horizontal_movement=Input.get_axis("Left","Right")
 	if event.is_action_pressed("Test"):
-		pass
+		print("Testing")
+		apply_knockback(Vector2(1,0),100,0.2)
+		take_damage(5,self)
+		print("Testing complete")
 	if can_move:
 		if horizontal_movement==-1:
 			sprite.flip_h=true
@@ -47,7 +57,8 @@ func _input(event: InputEvent) -> void:
 				load_next_attack=false
 			sprite.play("Walk")
 		else:
-			sprite.play("Idle")
+			if not dead:
+				sprite.play("Idle")
 	if event.is_action_pressed("Attack") and not can_attack:
 		load_next_attack=true
 	if event.is_action_pressed("Attack") and can_attack:
@@ -62,8 +73,8 @@ func _input(event: InputEvent) -> void:
 				attack_counter=0
 	
 
-
 func _on_sprite_animation_finished() -> void:
+	print(sprite.animation)
 	if sprite.animation=="Attack1":
 		if load_next_attack:
 			sprite.play("Attack2")
@@ -97,7 +108,6 @@ func _on_sprite_animation_finished() -> void:
 func _on_attack_timer_timeout() -> void:
 	attack_counter=0
 
-
 func _on_sprite_animation_changed() -> void:
 	if sprite.animation=="Attack1":
 		animation_player.play("TriggerAttack1")
@@ -108,3 +118,39 @@ func take_damage(damage:int, source:Node2D):
 	HealthPoints-=damage
 	if HealthPoints<=0:
 		player_dead.emit()
+		can_move=false
+		dead=true
+		can_attack=false
+		can_be_knocked=false
+		sprite.play("Dead")
+
+
+func apply_knockback(dir:Vector2, force:float, duration:float):
+	interrupt()
+	sprite.play("Hitted")
+	can_attack=false
+	can_move=false
+	knckback=dir*force
+	timeknockback=duration
+
+func get_knocked(delta:float):
+	velocity.x=knckback.x
+	timeknockback-=delta
+	move_and_slide()
+	if timeknockback<=0.0:
+		knckback=Vector2.ZERO
+		can_be_knocked=true
+		can_attack=true
+		can_move=true
+		await sprite.animation_finished
+		if not dead:
+			if horizontal_movement!=0 or vertical_movement!=0:
+				sprite.play("Walk")
+			else:
+				print(3)
+				sprite.play("Idle")
+			#print("knock done")
+
+func interrupt():
+	animation_player.play("RESET")
+	sprite.stop()
