@@ -8,6 +8,7 @@ class_name Player
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 @export var Speed:float=10
+@export var Knock_strength:float=50
 @export var HealthPoints:int=10
 var knckback:Vector2=Vector2.ZERO
 var timeknockback=0.0
@@ -40,17 +41,12 @@ func _input(event: InputEvent) -> void:
 	horizontal_movement=Input.get_axis("Left","Right")
 	if event.is_action_pressed("Test"):
 		print("Testing")
-		apply_knockback(Vector2(-1,0),100,0.2)
 		print("Testing complete")
 	if can_move:
 		if horizontal_movement==-1:
-			sprite.flip_h=true
-			attack_1.position=Vector2(-25.5,1.5)
-			attack_2.position=Vector2(-32,-10.5)
+			flip_stuff(true)
 		if horizontal_movement==1:
-			sprite.flip_h=false
-			attack_1.position=Vector2(32,1.5)
-			attack_2.position=Vector2(23,-10.5)
+			flip_stuff(false)
 		if horizontal_movement!=0 or vertical_movement!=0:
 			if load_next_attack:
 				load_next_attack=false
@@ -73,7 +69,6 @@ func _input(event: InputEvent) -> void:
 	
 
 func _on_sprite_animation_finished() -> void:
-	print(sprite.animation)
 	if sprite.animation=="Attack1":
 		if load_next_attack:
 			sprite.play("Attack2")
@@ -115,8 +110,11 @@ func _on_sprite_animation_changed() -> void:
 
 func take_damage(damage:int, source:Node2D):
 	var hit_dir=(global_position-source.global_position).normalized()
-	apply_knockback(hit_dir,50,0.2)
-	print("dir: ",hit_dir)
+	if hit_dir.x <0:
+		flip_stuff(false)
+	else:
+		flip_stuff(true)
+	apply_knockback(hit_dir,Knock_strength,0.2)
 	HealthPoints-=damage
 	if HealthPoints<=0:
 		player_dead.emit()
@@ -156,3 +154,13 @@ func get_knocked(delta:float):
 func interrupt():
 	animation_player.call_deferred("play","RESET")
 	sprite.stop()
+
+func flip_stuff(flip:bool):
+	if flip and sprite.flip_h!=true:
+		sprite.flip_h=true
+		attack_1.position=Vector2(-25.5,1.5)
+		attack_2.position=Vector2(-32,-10.5)
+	if not flip and sprite.flip_h==true:
+		sprite.flip_h=false
+		attack_1.position=Vector2(32,1.5)
+		attack_2.position=Vector2(23,-10.5)

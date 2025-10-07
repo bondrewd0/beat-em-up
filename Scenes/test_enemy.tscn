@@ -56,10 +56,15 @@ size = Vector2(20, 35)
 [sub_resource type="SeparationRayShape2D" id="SeparationRayShape2D_ymh8f"]
 length = 30.0
 
-[node name="TestEnemy" type="CharacterBody2D" node_paths=PackedStringArray("AttackZone")]
+[node name="TestEnemy" type="CharacterBody2D" node_paths=PackedStringArray("AttackZone", "TrackTimer", "AttackTimer", "RangeTimer")]
+y_sort_enabled = true
 scale = Vector2(2, 2)
 script = ExtResource("1_bs22l")
 AttackZone = NodePath("AttackZone")
+TrackTimer = NodePath("TrackTimer")
+AttackTimer = NodePath("AttackTimer")
+RangeTimer = NodePath("RangeTimer")
+Speed = 30.0
 
 [node name="FloorDetection" type="CollisionShape2D" parent="."]
 position = Vector2(-1, -2)
@@ -76,6 +81,7 @@ autoplay = "Idle"
 position = Vector2(-1, -18)
 collision_layer = 32
 collision_mask = 8
+collision_priority = 20.71
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 position = Vector2(0, 3.5)
@@ -90,6 +96,18 @@ collision_mask = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackZone"]
 rotation = 1.5708
 shape = SubResource("SeparationRayShape2D_ymh8f")
+
+[node name="TrackTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+autostart = true
+
+[node name="AttackTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="RangeTimer" type="Timer" parent="."]
+wait_time = 0.9
+one_shot = true
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]

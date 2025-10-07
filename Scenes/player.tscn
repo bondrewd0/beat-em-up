@@ -404,9 +404,11 @@ _data = {
 size = Vector2(20, 17.5)
 
 [node name="Player" type="CharacterBody2D"]
+y_sort_enabled = true
 scale = Vector2(2, 2)
 collision_mask = 2
 script = ExtResource("1_vgqql")
+Knock_strength = 75.0
 
 [node name="FloorCollider" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, -2)

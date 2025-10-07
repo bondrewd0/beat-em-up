@@ -28,7 +28,6 @@ tile_set = ExtResource("2_k5f4k")
 y_sort_origin = -50
 
 [node name="Player" parent="." instance=ExtResource("1_tumq0")]
-y_sort_enabled = true
 position = Vector2(406, 520)
 platform_floor_layers = 4294967042
 Speed = 200.0
