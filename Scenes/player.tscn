@@ -9,9 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://dlq8xnxk23r68" path="res://Assets/CharacterSprites/Player/_Death.png" id="4_f1ek2"]
 [ext_resource type="AudioStream" uid="uid://dhbwjgoyxufef" path="res://Assets/Sounds/SFX/08_Step_rock_02.wav" id="6_x3wgy"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_f60y1"]
-size = Vector2(20, 9)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_7dp3o"]
 atlas = ExtResource("2_fkybt")
 region = Rect2(0, 0, 120, 80)
@@ -328,12 +325,6 @@ animations = [{
 "speed": 15.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_fkybt"]
-size = Vector2(33, 18)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_x3wgy"]
-size = Vector2(34, 42)
-
 [sub_resource type="Animation" id="Animation_x3wgy"]
 length = 0.001
 tracks/0/type = "value"
@@ -400,8 +391,17 @@ _data = {
 &"TriggerAttack2": SubResource("Animation_3smsa")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fkybt"]
+size = Vector2(33, 18)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x3wgy"]
+size = Vector2(34, 42)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8erm5"]
 size = Vector2(20, 17.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f60y1"]
+size = Vector2(20, 9)
 
 [node name="Player" type="CharacterBody2D"]
 y_sort_enabled = true
@@ -409,10 +409,6 @@ scale = Vector2(2, 2)
 collision_mask = 2
 script = ExtResource("1_vgqql")
 Knock_strength = 75.0
-
-[node name="FloorCollider" type="CollisionShape2D" parent="."]
-position = Vector2(0.5, -2)
-shape = SubResource("RectangleShape2D_f60y1")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
@@ -425,6 +421,14 @@ flip_h = true
 [node name="AttackTimer" type="Timer" parent="."]
 wait_time = 0.6
 one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_3smsa")
+}
+
+[node name="Sfx" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_x3wgy")
 
 [node name="Attackcolliders" type="Node2D" parent="."]
 position = Vector2(1, -18.5)
@@ -449,14 +453,6 @@ shape = SubResource("RectangleShape2D_x3wgy")
 disabled = true
 debug_color = Color(0.111673, 0.522007, 1, 0.42)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_3smsa")
-}
-
-[node name="Sfx" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("6_x3wgy")
-
 [node name="HitBox" type="Area2D" parent="."]
 position = Vector2(10.5, -20.5)
 collision_layer = 4
@@ -466,6 +462,10 @@ collision_mask = 64
 position = Vector2(-7, -1.5)
 shape = SubResource("RectangleShape2D_8erm5")
 debug_color = Color(1.97336e-06, 0.643614, 0.296762, 0.42)
+
+[node name="FloorCollider" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, -2)
+shape = SubResource("RectangleShape2D_f60y1")
 
 [connection signal="animation_finished" from="Sprite" to="." method="_on_sprite_animation_finished"]
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

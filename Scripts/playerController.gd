@@ -2,7 +2,7 @@ extends CharacterBody2D
 class_name Player
 @onready var sprite: AnimatedSprite2D = $Sprite
 @onready var attack_timer: Timer = $AttackTimer
-
+@onready var sfx: AudioStreamPlayer2D = $Sfx
 @onready var attack_1: Area2D = $Attackcolliders/Attack1
 @onready var attack_2: Area2D = $Attackcolliders/Attack2
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -51,6 +51,7 @@ func _input(event: InputEvent) -> void:
 			if load_next_attack:
 				load_next_attack=false
 			sprite.play("Walk")
+			sfx.play()
 		else:
 			if not dead:
 				sprite.play("Idle")
