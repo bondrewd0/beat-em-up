@@ -15,12 +15,14 @@ func _ready() -> void:
 			enemy_counter+=1
 	SignalBus.enemy_dead.connect(check_level_complete)
 	SignalBus.player_dead.connect(disable_camera)
+	SignalBus.level_completed.connect(disable_camera)
 
 func check_level_complete():
 	#print("checking")
 	enemy_counter-=1
 	if enemy_counter==0:
 		print("victory")
+		SignalBus.level_completed.emit()
 	else: print("left: ", enemy_counter)
 
 func disable_camera():

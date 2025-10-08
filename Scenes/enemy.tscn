@@ -152,10 +152,13 @@ size = Vector2(20, 35)
 [sub_resource type="SeparationRayShape2D" id="SeparationRayShape2D_tk7xo"]
 length = 30.0
 
-[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("AttackZone", "TrackTimer", "AttackTimer", "RangeTimer")]
+[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("AttackZone", "HitBox", "TrackTimer", "AttackTimer", "RangeTimer")]
 scale = Vector2(2, 2)
+collision_layer = 16
+collision_mask = 2
 script = ExtResource("1_1dp5w")
 AttackZone = NodePath("AttackZone")
+HitBox = NodePath("HitBox")
 TrackTimer = NodePath("TrackTimer")
 AttackTimer = NodePath("AttackTimer")
 RangeTimer = NodePath("RangeTimer")

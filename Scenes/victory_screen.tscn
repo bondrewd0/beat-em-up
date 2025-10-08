@@ -1,0 +1,57 @@
+[gd_scene load_steps=5 format=3 uid="uid://c7q61yq1yerl7"]
+
+[ext_resource type="Script" uid="uid://678rs5u3qaow" path="res://Scenes/victory_screen.gd" id="1_mubwb"]
+[ext_resource type="FontFile" uid="uid://c028ao3j0lp6a" path="res://Assets/Fonts/Merchant Copy.ttf" id="2_fmvqe"]
+[ext_resource type="PackedScene" uid="uid://dsr32av7bnpae" path="res://Scenes/MenuButton.tscn" id="3_fmvqe"]
+
+[sub_resource type="Theme" id="Theme_vrh3u"]
+default_font = ExtResource("2_fmvqe")
+
+[node name="VictoryScreen" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mubwb")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 2
+color = Color(0.331267, 0.224478, 0.160815, 1)
+
+[node name="Text" type="RichTextLabel" parent="Background"]
+custom_minimum_size = Vector2(740, 101)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -370.0
+offset_top = -191.0
+offset_right = 370.0
+offset_bottom = -90.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_vrh3u")
+theme_override_colors/default_color = Color(0.784314, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 100
+bbcode_enabled = true
+text = "[center][b]Level complete!"
+
+[node name="Button" parent="Background" instance=ExtResource("3_fmvqe")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -43.5
+offset_top = -17.0
+offset_right = 43.5
+offset_bottom = 17.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Menu"
+Next_screen = "uid://ro1o63ixu7ag"

@@ -1,6 +1,7 @@
 extends  CharacterBody2D
 class_name Enemy
 @export var AttackZone:Area2D=null
+@export var HitBox:Area2D=null
 @export var TrackTimer:Timer=null
 @export var AttackTimer:Timer=null
 @export var RangeTimer:Timer=null
@@ -37,11 +38,15 @@ func stop():
 	player_close=false
 	AttackZone.set_deferred("monitoring",false)
 	AttackZone.set_deferred("monitorable",false)
+	HitBox.set_deferred("monitoring",false)
+	HitBox.set_deferred("monitorable",false)
 	floor_detection.set_deferred("disable",true)
 	collision_shape_2d.set_deferred("disable",true)
 	collision_shape_2d2.set_deferred("disable",true)
 	player_ref=null
-	sprite.play("Idle")
+	if not dead:
+		print(1)
+		sprite.play("Idle")
 
 func attack_timeout():
 	#print(player_close)
@@ -53,7 +58,9 @@ func attack_timeout():
 			apply_damage()
 			AttackTimer.start()
 	else:
-		sprite.play("Idle")
+		if not dead:
+			print(2)
+			sprite.play("Idle")
 
 func track_switch():
 	if not player_close:
@@ -61,6 +68,7 @@ func track_switch():
 		#print("Tracking: ",tracking)
 		if not tracking:
 			sprite.play("Idle")
+			print(3)
 			TrackTimer.wait_time=1
 			can_move=false
 			velocity=Vector2.ZERO
@@ -71,6 +79,8 @@ func track_switch():
 		TrackTimer.start()
 
 func player_on_range(area:Area2D):
+	if dead:
+		return
 	var player_node=area.get_parent()
 	if player_node is Player:
 		#print("hittable")
@@ -82,8 +92,10 @@ func player_on_range(area:Area2D):
 		await RangeTimer.timeout
 		tracking=false
 		velocity=Vector2.ZERO
-		sprite.play("Idle")
-		AttackTimer.start()
+		print(4.1)
+		if not dead:
+			sprite.play("Idle")
+			AttackTimer.start()
 		
 
 func player_out_of_range(area:Area2D):
@@ -169,12 +181,17 @@ func take_damage():
 	#print("Health: ",Health_Points)
 	if Health_Points<=0:
 		dead=true
+		AttackZone.set_deferred("monitoring",false)
+		AttackZone.set_deferred("monitorable",false)
+		HitBox.set_deferred("monitoring",false)
+		HitBox.set_deferred("monitorable",false)
+		player_close=false
 		can_move=false
 		tracking=false
 		velocity=Vector2.ZERO
 		TrackTimer.stop()
 		AttackTimer.stop()
-		player_close=false
+		
 		floor_detection.set_deferred("disable",true)
 		collision_shape_2d.set_deferred("disable",true)
 		collision_shape_2d2.set_deferred("disable",true)
@@ -198,6 +215,7 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 		if not player_close:
 			sprite.play("Move")
 		else:
+			print(6)
 			sprite.play("Idle")
 	if sprite.animation=="Die":
 		after_spawn_timer.start()

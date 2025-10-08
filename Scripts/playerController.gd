@@ -44,6 +44,7 @@ func _input(event: InputEvent) -> void:
 		SignalBus.restart.emit()
 	if event.is_action_pressed("Test"):
 		print("Testing")
+		SignalBus.level_completed.emit()
 		print("Testing complete")
 	if can_move:
 		if horizontal_movement==-1:

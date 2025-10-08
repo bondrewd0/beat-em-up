@@ -138,24 +138,32 @@ size_flags_vertical = 0
 
 [node name="SpawnArea" parent="." instance=ExtResource("10_oqgf2")]
 position = Vector2(1256, 431)
+Used = true
 
 [node name="SpawnArea2" parent="." instance=ExtResource("10_oqgf2")]
 position = Vector2(751, 467)
+Used = true
 
 [node name="SpawnArea3" parent="." instance=ExtResource("10_oqgf2")]
 position = Vector2(1203, 494)
+Used = true
 
 [node name="SpawnArea4" parent="." instance=ExtResource("10_oqgf2")]
 position = Vector2(1740, 391)
+Used = true
 
 [node name="SpawnArea5" parent="." instance=ExtResource("10_oqgf2")]
 position = Vector2(1946, 513)
+Used = true
 
 [node name="SpawnArea6" parent="." instance=ExtResource("10_oqgf2")]
 position = Vector2(2377, 308)
+Used = true
 
 [node name="SpawnArea7" parent="." instance=ExtResource("10_oqgf2")]
 position = Vector2(2578, 383)
+Used = true
 
 [node name="SpawnArea8" parent="." instance=ExtResource("10_oqgf2")]
 position = Vector2(2437, 518)
+Used = true
