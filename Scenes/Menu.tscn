@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://ro1o63ixu7ag"]
+[gd_scene load_steps=5 format=3 uid="uid://ro1o63ixu7ag"]
 
 [ext_resource type="Theme" uid="uid://duhylbv7ogrcf" path="res://Assets/Themes/ButtonTheme.tres" id="1_3kf3n"]
 [ext_resource type="Script" uid="uid://cg88vug4xq11l" path="res://Scenes/menu.gd" id="1_6pedr"]
+[ext_resource type="PackedScene" uid="uid://7m54hbxje3uf" path="res://Scenes/level.tscn" id="2_s2c3o"]
 [ext_resource type="PackedScene" uid="uid://dsr32av7bnpae" path="res://Scenes/MenuButton.tscn" id="3_syfuq"]
 
 [node name="MainMenu" type="MarginContainer"]
@@ -11,7 +12,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_6pedr")
-Initial_level = "uid://7m54hbxje3uf"
+Initial_level = ExtResource("2_s2c3o")
 
 [node name="Background" type="ColorRect" parent="."]
 layout_mode = 2

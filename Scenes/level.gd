@@ -14,10 +14,9 @@ func _ready() -> void:
 			area.Player_ref=Player_node
 			enemy_counter+=1
 	SignalBus.enemy_dead.connect(check_level_complete)
-	print(enemy_counter)
 
 func check_level_complete():
-	print("checking")
+	#print("checking")
 	enemy_counter-=1
 	if enemy_counter==0:
 		print("victory")

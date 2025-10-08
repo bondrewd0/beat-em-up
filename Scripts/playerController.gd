@@ -41,6 +41,8 @@ func _process(delta: float) -> void:
 func _input(event: InputEvent) -> void:
 	vertical_movement=Input.get_axis("Up","Down")
 	horizontal_movement=Input.get_axis("Left","Right")
+	if event.is_action_released("Restart"):
+		SignalBus.restart.emit()
 	if event.is_action_pressed("Test"):
 		print("Testing")
 		print("Testing complete")
