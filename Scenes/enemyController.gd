@@ -8,6 +8,9 @@ class_name Enemy
 @export var Health_Points:int=5
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var after_spawn_timer: Timer = $AfterSpawnTimer
+@onready var floor_detection: CollisionShape2D = $FloorDetection
+@onready var collision_shape_2d: CollisionShape2D = $HitBox/CollisionShape2D
+@onready var collision_shape_2d2: CollisionShape2D = $AttackZone/CollisionShape2D
 
 var knckback:Vector2=Vector2.ZERO
 var timeknockback=0.0
@@ -16,6 +19,7 @@ var player_ref:Player=null
 var player_close:bool=false
 var tracking:bool=false
 var can_move:bool=false
+var dead:bool=false
 func _ready() -> void:
 	sprite.play("Spawn")
 	AttackZone.area_entered.connect(player_on_range)
@@ -24,7 +28,7 @@ func _ready() -> void:
 	AttackTimer.timeout.connect(attack_timeout)
 
 func attack_timeout():
-	print(player_close)
+	#print(player_close)
 	if player_close:
 		sprite.position=Vector2(-10,-29)
 		sprite.play("Attack")
@@ -38,7 +42,7 @@ func attack_timeout():
 func track_switch():
 	if not player_close:
 		tracking=!tracking
-		print("Tracking: ",tracking)
+		#print("Tracking: ",tracking)
 		if not tracking:
 			sprite.play("Idle")
 			TrackTimer.wait_time=1
@@ -53,7 +57,7 @@ func track_switch():
 func player_on_range(area:Area2D):
 	var player_node=area.get_parent()
 	if player_node is Player:
-		print("hittable")
+		#print("hittable")
 		RangeTimer.start()
 		TrackTimer.stop()
 		if not player_ref.dead:
@@ -68,7 +72,7 @@ func player_on_range(area:Area2D):
 
 func player_out_of_range(area:Area2D):
 	player_close=false
-	print("out of range")
+	#print("out of range")
 	AttackTimer.stop()
 	TrackTimer.wait_time=4
 	TrackTimer.start()
@@ -90,6 +94,8 @@ func move_to_target(delta:float):
 	velocity=direction*Speed
 
 func _on_hit_box_area_entered(area: Area2D) -> void:
+	if dead:
+		return
 	sprite.stop()
 	take_damage()
 	var hit_dir=(global_position-area.get_parent().global_position).normalized()
@@ -104,7 +110,7 @@ func apply_knockback(dir:Vector2, force:float, duration:float):
 	tracking=false
 	AttackTimer.stop()
 	TrackTimer.stop()
-	print("dir:", dir)
+	#print("dir:", dir)
 	knckback=dir*force
 	timeknockback=duration
 	sprite.play("hit")
@@ -128,7 +134,7 @@ func get_knocked(delta:float):
 			tracking=true
 			TrackTimer.start()
 			sprite.play("Move")
-		print("knock done")
+		#print("knock done")
 
 func apply_damage():
 	if not player_ref.dead and player_close:
@@ -144,20 +150,27 @@ func flip_stuff(flip:bool):
 
 func take_damage():
 	Health_Points-=1
-	print("Health: ",Health_Points)
+	#print("Health: ",Health_Points)
 	if Health_Points<=0:
+		dead=true
 		can_move=false
 		tracking=false
 		velocity=Vector2.ZERO
 		TrackTimer.stop()
 		AttackTimer.stop()
 		player_close=false
+		floor_detection.set_deferred("disable",true)
+		collision_shape_2d.set_deferred("disable",true)
+		collision_shape_2d2.set_deferred("disable",true)
 		sprite.play("Die")
 	
 
 
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if sprite.animation=="Spawn":
+		floor_detection.disabled=false
+		collision_shape_2d.disabled=false
+		collision_shape_2d2.disabled=false
 		after_spawn_timer.start()
 		await after_spawn_timer.timeout
 		tracking=true
@@ -173,4 +186,5 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 	if sprite.animation=="Die":
 		after_spawn_timer.start()
 		await after_spawn_timer.timeout
+		SignalBus.enemy_dead.emit()
 		queue_free()

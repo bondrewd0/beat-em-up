@@ -15,6 +15,10 @@ run/main_scene="uid://ro1o63ixu7ag"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+SignalBus="*res://Scripts/SignalBus.gd"
+
 [dotnet]
 
 project/assembly_name="Beat em up"
@@ -61,6 +65,8 @@ Test={
 2d_physics/layer_5="EnemyFeet"
 2d_physics/layer_6="EnemyHitbox"
 2d_physics/layer_7="EnemyHitZone"
+2d_physics/layer_8="CamArea"
+2d_physics/layer_9="SpawnDetector"
 
 [rendering]
 

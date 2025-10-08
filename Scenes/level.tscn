@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://7m54hbxje3uf"]
+[gd_scene load_steps=12 format=4 uid="uid://7m54hbxje3uf"]
 
 [ext_resource type="Script" uid="uid://bq6suyjmxsxsa" path="res://Scenes/level.gd" id="1_754fn"]
 [ext_resource type="PackedScene" uid="uid://dagwl50mytxjc" path="res://Scenes/player.tscn" id="1_tumq0"]
@@ -9,12 +9,17 @@
 [ext_resource type="Texture2D" uid="uid://csmsceocpulb3" path="res://Assets/Background/BG-ruins.png" id="4_wqkje"]
 [ext_resource type="PackedScene" uid="uid://ctqmjs8h377dd" path="res://Scenes/PlayerHealthBar.tscn" id="9_bvt00"]
 [ext_resource type="PackedScene" uid="uid://ck8mkjleef5or" path="res://Scenes/enemy.tscn" id="9_oqgf2"]
+[ext_resource type="PackedScene" uid="uid://bc5dkj0kx8axl" path="res://Scenes/spawn_area.tscn" id="10_oqgf2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bvt00"]
+size = Vector2(172, 297)
 
 [node name="Level" type="Node2D" node_paths=PackedStringArray("Player_node")]
 process_mode = 1
 y_sort_enabled = true
 script = ExtResource("1_754fn")
 Player_node = NodePath("Player")
+Enemy_dir = ExtResource("9_oqgf2")
 
 [node name="Map" type="TileMapLayer" parent="."]
 y_sort_enabled = true
@@ -30,7 +35,7 @@ y_sort_origin = -50
 metadata/_edit_lock_ = true
 
 [node name="Player" parent="." node_paths=PackedStringArray("HP_Bar") instance=ExtResource("1_tumq0")]
-position = Vector2(406, 520)
+position = Vector2(133, 520)
 platform_floor_layers = 4294967042
 HP_Bar = NodePath("../CanvasLayer/HP")
 Speed = 200.0
@@ -95,10 +100,19 @@ texture = ExtResource("4_wqkje")
 centered = false
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(406, 520)
+position = Vector2(133, 520)
 scale = Vector2(2, 2)
 limit_left = 0
 limit_bottom = 650
+
+[node name="CamArea" type="Area2D" parent="Camera2D"]
+position = Vector2(180, -67)
+collision_layer = 128
+collision_mask = 256
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/CamArea"]
+shape = SubResource("RectangleShape2D_bvt00")
+debug_color = Color(0.811054, 0.411147, 1.92523e-07, 0.42)
 
 [node name="Label" type="Label" parent="."]
 visible = false
@@ -107,9 +121,6 @@ offset_top = 519.0
 offset_right = 625.0
 offset_bottom = 542.0
 text = "Baño vuelvo  8:50 aprox"
-
-[node name="Enemy" parent="." instance=ExtResource("9_oqgf2")]
-position = Vector2(530, 462)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -124,3 +135,27 @@ grow_horizontal = 2
 scale = Vector2(4, 4)
 size_flags_horizontal = 0
 size_flags_vertical = 0
+
+[node name="SpawnArea" parent="." instance=ExtResource("10_oqgf2")]
+position = Vector2(1256, 431)
+
+[node name="SpawnArea2" parent="." instance=ExtResource("10_oqgf2")]
+position = Vector2(751, 467)
+
+[node name="SpawnArea3" parent="." instance=ExtResource("10_oqgf2")]
+position = Vector2(1203, 494)
+
+[node name="SpawnArea4" parent="." instance=ExtResource("10_oqgf2")]
+position = Vector2(1740, 391)
+
+[node name="SpawnArea5" parent="." instance=ExtResource("10_oqgf2")]
+position = Vector2(1946, 513)
+
+[node name="SpawnArea6" parent="." instance=ExtResource("10_oqgf2")]
+position = Vector2(2377, 308)
+
+[node name="SpawnArea7" parent="." instance=ExtResource("10_oqgf2")]
+position = Vector2(2578, 383)
+
+[node name="SpawnArea8" parent="." instance=ExtResource("10_oqgf2")]
+position = Vector2(2437, 518)
