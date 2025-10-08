@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://3ht6qcilw87k"]
+
+[ext_resource type="Texture2D" uid="uid://bqffyxxr3qd0x" path="res://Assets/CharacterSprites/Enemy/Enemyframe.png" id="1_avuj5"]
+
+[node name="EnemyHPBar" type="ProgressBar"]
+offset_left = 42.0
+offset_top = 1.0
+offset_right = 363.0
+offset_bottom = 28.0
+max_value = 5.0
+value = 5.0
+
+[node name="Icon" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = -44.0
+offset_top = -5.0
+offset_right = -4.0
+offset_bottom = 35.0
+texture = ExtResource("1_avuj5")
