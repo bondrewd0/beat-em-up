@@ -414,9 +414,8 @@ Knock_strength = 75.0
 texture_filter = 1
 position = Vector2(3.5, -40)
 sprite_frames = SubResource("SpriteFrames_f60y1")
-animation = &"Walk"
+animation = &"Dead"
 autoplay = "Idle"
-frame_progress = 0.152848
 flip_h = true
 
 [node name="AttackTimer" type="Timer" parent="."]

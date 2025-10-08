@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bjjypswtnu6u2"]
+[gd_scene load_steps=4 format=3 uid="uid://bjjypswtnu6u2"]
 
 [ext_resource type="Script" uid="uid://c02v5lx18atpj" path="res://Scenes/admin.gd" id="1_mynlb"]
 [ext_resource type="PackedScene" uid="uid://ro1o63ixu7ag" path="res://Scenes/Menu.tscn" id="2_7c8jb"]
+[ext_resource type="PackedScene" uid="uid://sgwrda12g8yf" path="res://Scenes/game_over_screen.tscn" id="3_1e8uw"]
 
 [node name="Admin" type="Control"]
 process_mode = 3
@@ -13,3 +14,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_mynlb")
 MainMenu = ExtResource("2_7c8jb")
+
+[node name="GameOverScreen" parent="." instance=ExtResource("3_1e8uw")]
+visible = false
+layout_mode = 1

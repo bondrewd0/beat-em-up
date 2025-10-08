@@ -1,0 +1,59 @@
+[gd_scene load_steps=5 format=3 uid="uid://sgwrda12g8yf"]
+
+[ext_resource type="FontFile" uid="uid://c028ao3j0lp6a" path="res://Assets/Fonts/Merchant Copy.ttf" id="1_0gua7"]
+[ext_resource type="Script" uid="uid://c6q00fdssnxkx" path="res://Scenes/game_over_screen.gd" id="1_y8man"]
+[ext_resource type="Theme" uid="uid://duhylbv7ogrcf" path="res://Assets/Themes/ButtonTheme.tres" id="2_jb6in"]
+
+[sub_resource type="Theme" id="Theme_jb6in"]
+default_font = ExtResource("1_0gua7")
+
+[node name="GameOverScreen" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_y8man")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 2
+color = Color(0.331267, 0.224478, 0.160815, 1)
+
+[node name="Text" type="RichTextLabel" parent="Background"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 239.0
+offset_top = 121.0
+offset_right = -173.0
+offset_bottom = -93.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_jb6in")
+theme_override_colors/default_color = Color(0.784314, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 100
+bbcode_enabled = true
+text = "[center][b]GAME OVER "
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 40
+
+[node name="RestartButton" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(10, 50)
+layout_mode = 2
+theme = ExtResource("2_jb6in")
+text = "Restart"
+
+[node name="ExitButton" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(10, 50)
+layout_mode = 2
+theme = ExtResource("2_jb6in")
+text = "Exit"
+
+[connection signal="pressed" from="VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]

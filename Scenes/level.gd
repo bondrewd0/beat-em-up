@@ -14,6 +14,7 @@ func _ready() -> void:
 			area.Player_ref=Player_node
 			enemy_counter+=1
 	SignalBus.enemy_dead.connect(check_level_complete)
+	SignalBus.player_dead.connect(disable_camera)
 
 func check_level_complete():
 	#print("checking")
@@ -21,3 +22,6 @@ func check_level_complete():
 	if enemy_counter==0:
 		print("victory")
 	else: print("left: ", enemy_counter)
+
+func disable_camera():
+	$Camera2D.enabled=false

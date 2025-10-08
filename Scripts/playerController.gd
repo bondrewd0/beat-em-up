@@ -21,7 +21,6 @@ var attack_counter:int=0
 var load_next_attack:bool=false
 var can_be_knocked:bool=true
 var dead:bool=false
-signal player_dead
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	sprite.animation_changed.connect(_on_sprite_animation_changed)
@@ -108,6 +107,9 @@ func _on_sprite_animation_finished() -> void:
 			sprite.play("Walk")
 		attack_timer.start()
 		attack_counter=0
+	if sprite.animation=="Dead":
+		SignalBus.player_dead.emit()
+		print("dead xd")
 
 func _on_attack_timer_timeout() -> void:
 	attack_counter=0
@@ -130,7 +132,7 @@ func take_damage(damage:int, source:Node2D):
 	HealthPoints-=damage
 	HP_Bar.value=HealthPoints
 	if HealthPoints<=0:
-		player_dead.emit()
+		
 		can_move=false
 		dead=true
 		can_attack=false

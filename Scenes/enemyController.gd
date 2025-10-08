@@ -26,10 +26,26 @@ func _ready() -> void:
 	AttackZone.area_exited.connect(player_out_of_range)
 	TrackTimer.timeout.connect(track_switch)
 	AttackTimer.timeout.connect(attack_timeout)
+	SignalBus.player_dead.connect(stop)
+
+func stop():
+	tracking=false
+	can_move=false
+	sprite.stop()
+	TrackTimer.stop()
+	AttackTimer.stop()
+	player_close=false
+	AttackZone.set_deferred("monitoring",false)
+	AttackZone.set_deferred("monitorable",false)
+	floor_detection.set_deferred("disable",true)
+	collision_shape_2d.set_deferred("disable",true)
+	collision_shape_2d2.set_deferred("disable",true)
+	player_ref=null
+	sprite.play("Idle")
 
 func attack_timeout():
 	#print(player_close)
-	if player_close:
+	if player_close and not player_ref.dead:
 		sprite.position=Vector2(-10,-29)
 		sprite.play("Attack")
 		await sprite.animation_finished
