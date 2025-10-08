@@ -7,6 +7,7 @@ class_name Player
 @onready var attack_2: Area2D = $Attackcolliders/Attack2
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
+@export var HP_Bar:TextureProgressBar=null
 @export var Speed:float=10
 @export var Knock_strength:float=50
 @export var HealthPoints:int=10
@@ -24,7 +25,8 @@ signal player_dead
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	sprite.animation_changed.connect(_on_sprite_animation_changed)
-
+	HP_Bar.max_value=HealthPoints
+	HP_Bar.value=HealthPoints
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -51,9 +53,12 @@ func _input(event: InputEvent) -> void:
 			if load_next_attack:
 				load_next_attack=false
 			sprite.play("Walk")
-			sfx.play()
+			if not sfx.playing:
+				sfx.play()
 		else:
 			if not dead:
+				if sfx.playing:
+					sfx.stop()
 				sprite.play("Idle")
 	if event.is_action_pressed("Attack") and not can_attack:
 		load_next_attack=true
@@ -61,6 +66,8 @@ func _input(event: InputEvent) -> void:
 		can_move=false
 		can_attack=false
 		attack_counter+=1
+		if sfx.playing:
+					sfx.stop()
 		match attack_counter:
 			1:
 				sprite.play("Attack1")
@@ -110,6 +117,8 @@ func _on_sprite_animation_changed() -> void:
 		animation_player.play("TriggerAttack2")
 
 func take_damage(damage:int, source:Node2D):
+	if sfx.playing:
+		sfx.stop()
 	var hit_dir=(global_position-source.global_position).normalized()
 	if hit_dir.x <0:
 		flip_stuff(false)
@@ -117,6 +126,7 @@ func take_damage(damage:int, source:Node2D):
 		flip_stuff(true)
 	apply_knockback(hit_dir,Knock_strength,0.2)
 	HealthPoints-=damage
+	HP_Bar.value=HealthPoints
 	if HealthPoints<=0:
 		player_dead.emit()
 		can_move=false
@@ -124,6 +134,7 @@ func take_damage(damage:int, source:Node2D):
 		can_attack=false
 		can_be_knocked=false
 		sprite.play("Dead")
+		
 
 
 func apply_knockback(dir:Vector2, force:float, duration:float):

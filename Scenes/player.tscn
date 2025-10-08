@@ -414,8 +414,9 @@ Knock_strength = 75.0
 texture_filter = 1
 position = Vector2(3.5, -40)
 sprite_frames = SubResource("SpriteFrames_f60y1")
-animation = &"Dead"
+animation = &"Walk"
 autoplay = "Idle"
+frame_progress = 0.152848
 flip_h = true
 
 [node name="AttackTimer" type="Timer" parent="."]
@@ -429,6 +430,9 @@ libraries = {
 
 [node name="Sfx" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_x3wgy")
+volume_db = -0.4
+pitch_scale = 1.33
+bus = &"SoundEfects"
 
 [node name="Attackcolliders" type="Node2D" parent="."]
 position = Vector2(1, -18.5)

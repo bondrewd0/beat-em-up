@@ -1,0 +1,184 @@
+[gd_scene load_steps=15 format=3 uid="uid://ctqmjs8h377dd"]
+
+[ext_resource type="Texture2D" uid="uid://byp0j73sd3bqs" path="res://Assets/Bars/PlayerBar.tres" id="1_2og1r"]
+[ext_resource type="Texture2D" uid="uid://di4ef8cjslpb" path="res://Assets/Bars/bar.png" id="2_k5148"]
+[ext_resource type="Script" uid="uid://kmhnhbg374x" path="res://Scenes/player_health_bar.gd" id="3_dsita"]
+[ext_resource type="Texture2D" uid="uid://d1j36s8ikwb7g" path="res://Assets/Bars/healthbars_gemstones.png" id="3_ic8xp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dsita"]
+atlas = ExtResource("3_ic8xp")
+region = Rect2(127, 126, 17, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bwjlx"]
+atlas = ExtResource("3_ic8xp")
+region = Rect2(148, 126, 17, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ck8w2"]
+atlas = ExtResource("3_ic8xp")
+region = Rect2(169, 126, 17, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w7l5i"]
+atlas = ExtResource("3_ic8xp")
+region = Rect2(232, 126, 17, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lq2xx"]
+atlas = ExtResource("3_ic8xp")
+region = Rect2(190, 126, 17, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pdeoe"]
+atlas = ExtResource("3_ic8xp")
+region = Rect2(211, 126, 17, 18)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_m404k"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dsita")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bwjlx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ck8w2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w7l5i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lq2xx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pdeoe")
+}],
+"loop": true,
+"name": &"default",
+"speed": 7.0
+}]
+
+[sub_resource type="Animation" id="Animation_dsita"]
+resource_name = "Flash"
+length = 0.5
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate:r")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.172608, 0.326555, 0.443182)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate:g")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.172608, 0.326555, 0.443182)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:modulate:b")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.172608, 0.326555, 0.443182)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:modulate:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 0.478431, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 0.478431, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.172608, 0.326555, 0.443182, 0.5)
+}
+
+[sub_resource type="Animation" id="Animation_bwjlx"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate:r")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate:g")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:modulate:b")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:modulate:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bwjlx"]
+_data = {
+&"Flash": SubResource("Animation_dsita"),
+&"RESET": SubResource("Animation_bwjlx")
+}
+
+[node name="HPBar" type="TextureProgressBar"]
+texture_filter = 1
+offset_left = 18.0
+offset_top = 3.0
+offset_right = 74.0
+offset_bottom = 14.0
+max_value = 10.0
+value = 10.0
+texture_under = ExtResource("1_2og1r")
+texture_progress = ExtResource("2_k5148")
+texture_progress_offset = Vector2(3, 1)
+script = ExtResource("3_dsita")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-9, 6)
+sprite_frames = SubResource("SpriteFrames_m404k")
+autoplay = "default"
+frame_progress = 0.424515
+
+[node name="Effect" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_bwjlx")
+}
+
+[connection signal="value_changed" from="." to="." method="_on_value_changed"]
