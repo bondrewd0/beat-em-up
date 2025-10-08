@@ -1,6 +1,6 @@
-[gd_scene load_steps=33 format=3 uid="uid://ck8mkjleef5or"]
+[gd_scene load_steps=37 format=3 uid="uid://ck8mkjleef5or"]
 
-[ext_resource type="Script" uid="uid://bodpbco5ilmao" path="res://Scenes/enemyController.gd" id="1_1dp5w"]
+[ext_resource type="Script" uid="uid://bodpbco5ilmao" path="res://Scripts/enemyController.gd" id="1_1dp5w"]
 [ext_resource type="Texture2D" uid="uid://cw8gbhofu7jnb" path="res://Assets/CharacterSprites/Enemy/ready_1.png" id="2_1dp5w"]
 [ext_resource type="Texture2D" uid="uid://cbsa4ecq6q428" path="res://Assets/CharacterSprites/Enemy/attack1_1.png" id="2_ta2yt"]
 [ext_resource type="Texture2D" uid="uid://m5oufvufwpfi" path="res://Assets/CharacterSprites/Enemy/ready_2.png" id="3_auwsv"]
@@ -28,6 +28,10 @@
 [ext_resource type="Texture2D" uid="uid://c0j78x8ec65l" path="res://Assets/CharacterSprites/Enemy/walk_4.png" id="20_nxecp"]
 [ext_resource type="Texture2D" uid="uid://clur3b26yykqa" path="res://Assets/CharacterSprites/Enemy/walk_5.png" id="21_6jaer"]
 [ext_resource type="Texture2D" uid="uid://hb8qlqvyew8t" path="res://Assets/CharacterSprites/Enemy/walk_6.png" id="22_ve8xs"]
+[ext_resource type="PackedScene" uid="uid://3ht6qcilw87k" path="res://Scenes/enemy_hp_bar.tscn" id="29_0whn2"]
+[ext_resource type="AudioStream" uid="uid://dhbwjgoyxufef" path="res://Assets/Sounds/SFX/08_Step_rock_02.wav" id="30_nxecp"]
+[ext_resource type="AudioStream" uid="uid://c0uk0xdsloqhk" path="res://Assets/Sounds/SFX/56_Attack_03.wav" id="31_6jaer"]
+[ext_resource type="AudioStream" uid="uid://bxipomeduqrlp" path="res://Assets/Sounds/SFX/22_Slash_04.wav" id="32_ve8xs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m4x7e"]
 size = Vector2(20, 9)
@@ -213,6 +217,29 @@ one_shot = true
 [node name="AfterSpawnTimer" type="Timer" parent="."]
 wait_time = 0.5
 one_shot = true
+
+[node name="EnemyHPBar" parent="." instance=ExtResource("29_0whn2")]
+visible = false
+offset_left = -31.5
+offset_top = 5.5
+offset_right = 289.5
+offset_bottom = 32.5
+scale = Vector2(0.2, 0.2)
+
+[node name="Sfx" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("30_nxecp")
+volume_db = -0.4
+pitch_scale = 1.33
+bus = &"SoundEfects"
+
+[node name="Attacksfx" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("31_6jaer")
+volume_db = 20.0
+bus = &"SoundEfects"
+
+[node name="HittedSfx" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("32_ve8xs")
+bus = &"SoundEfects"
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]

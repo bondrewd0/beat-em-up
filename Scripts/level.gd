@@ -2,6 +2,7 @@ extends Node2D
 
 @export var Player_node:Player=null
 @export var Enemy_dir:PackedScene
+@onready var canvas_layer: CanvasLayer = $CanvasLayer
 
 var enemy_counter:int=0
 # Called when the node enters the scene tree for the first time.
@@ -26,4 +27,5 @@ func check_level_complete():
 	else: print("left: ", enemy_counter)
 
 func disable_camera():
+	canvas_layer.hide()
 	$Camera2D.enabled=false

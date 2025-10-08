@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://ro1o63ixu7ag"]
+[gd_scene load_steps=13 format=3 uid="uid://ro1o63ixu7ag"]
 
 [ext_resource type="Theme" uid="uid://duhylbv7ogrcf" path="res://Assets/Themes/ButtonTheme.tres" id="1_3kf3n"]
-[ext_resource type="Script" uid="uid://cg88vug4xq11l" path="res://Scenes/menu.gd" id="1_6pedr"]
+[ext_resource type="Script" uid="uid://cg88vug4xq11l" path="res://Scripts/menu.gd" id="1_6pedr"]
 [ext_resource type="PackedScene" uid="uid://7m54hbxje3uf" path="res://Scenes/level.tscn" id="2_s2c3o"]
+[ext_resource type="Texture2D" uid="uid://dfytamnmtr8yf" path="res://Assets/Background/background tp.png" id="3_qki4b"]
 [ext_resource type="PackedScene" uid="uid://dsr32av7bnpae" path="res://Scenes/MenuButton.tscn" id="3_syfuq"]
 [ext_resource type="Texture2D" uid="uid://b4tfl6klba5lf" path="res://Assets/KeyMaps/A.png" id="5_sjh0l"]
 [ext_resource type="FontFile" uid="uid://djpufmcqdqk4v" path="res://Assets/Fonts/Merchant Copy Doublesize.ttf" id="6_qki4b"]
@@ -26,8 +27,15 @@ Initial_level = ExtResource("2_s2c3o")
 layout_mode = 2
 color = Color(0.482353, 0.337255, 0.25098, 1)
 
+[node name="TextureRect" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("3_qki4b")
+expand_mode = 1
+
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
+theme_override_constants/separation = 100
 
 [node name="Tittle" type="RichTextLabel" parent="VBoxContainer"]
 custom_minimum_size = Vector2(100, 100)
@@ -71,10 +79,10 @@ mouse_filter = 2
 [node name="A" type="TextureRect" parent="Inputs"]
 texture_filter = 1
 layout_mode = 0
-offset_left = 127.0
-offset_top = 248.0
-offset_right = 167.0
-offset_bottom = 288.0
+offset_left = 626.0
+offset_top = 504.0
+offset_right = 666.0
+offset_bottom = 544.0
 texture = ExtResource("5_sjh0l")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Inputs/A"]
@@ -91,14 +99,15 @@ text = "Left"
 [node name="D" type="TextureRect" parent="Inputs"]
 texture_filter = 1
 layout_mode = 0
-offset_left = 252.0
-offset_top = 248.0
-offset_right = 292.0
-offset_bottom = 288.0
+offset_left = 751.0
+offset_top = 504.0
+offset_right = 791.0
+offset_bottom = 544.0
 texture = ExtResource("7_byewe")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Inputs/D"]
 texture_filter = 1
+layout_mode = 0
 offset_left = -3.0
 offset_top = 45.0
 offset_right = 63.0
@@ -110,14 +119,15 @@ text = "Right"
 [node name="R" type="TextureRect" parent="Inputs"]
 texture_filter = 1
 layout_mode = 0
-offset_left = 324.0
-offset_top = 248.0
-offset_right = 364.0
-offset_bottom = 288.0
+offset_left = 823.0
+offset_top = 504.0
+offset_right = 863.0
+offset_bottom = 544.0
 texture = ExtResource("8_a8aa6")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Inputs/R"]
 texture_filter = 1
+layout_mode = 0
 offset_left = 56.0
 offset_top = 6.0
 offset_right = 145.0
@@ -129,14 +139,15 @@ text = "Restart"
 [node name="S" type="TextureRect" parent="Inputs"]
 texture_filter = 1
 layout_mode = 0
-offset_left = 186.0
-offset_top = 248.0
-offset_right = 226.0
-offset_bottom = 288.0
+offset_left = 685.0
+offset_top = 504.0
+offset_right = 725.0
+offset_bottom = 544.0
 texture = ExtResource("9_x0ao6")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Inputs/S"]
 texture_filter = 1
+layout_mode = 0
 offset_left = -3.0
 offset_top = 45.0
 offset_right = 52.0
@@ -148,14 +159,15 @@ text = "Down"
 [node name="W" type="TextureRect" parent="Inputs"]
 texture_filter = 1
 layout_mode = 0
-offset_left = 186.0
-offset_top = 196.0
-offset_right = 226.0
-offset_bottom = 236.0
+offset_left = 685.0
+offset_top = 452.0
+offset_right = 725.0
+offset_bottom = 492.0
 texture = ExtResource("10_dsmso")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Inputs/W"]
 texture_filter = 1
+layout_mode = 0
 offset_left = 9.0
 offset_top = -29.0
 offset_right = 64.0
@@ -167,14 +179,15 @@ text = "Up"
 [node name="F" type="TextureRect" parent="Inputs"]
 texture_filter = 1
 layout_mode = 0
-offset_left = 324.0
-offset_top = 196.0
-offset_right = 364.0
-offset_bottom = 236.0
+offset_left = 823.0
+offset_top = 452.0
+offset_right = 863.0
+offset_bottom = 492.0
 texture = ExtResource("11_t8p2w")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Inputs/F"]
 texture_filter = 1
+layout_mode = 0
 offset_left = 56.0
 offset_top = 3.0
 offset_right = 127.0

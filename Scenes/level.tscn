@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=4 uid="uid://7m54hbxje3uf"]
 
-[ext_resource type="Script" uid="uid://bq6suyjmxsxsa" path="res://Scenes/level.gd" id="1_754fn"]
+[ext_resource type="Script" uid="uid://bq6suyjmxsxsa" path="res://Scripts/level.gd" id="1_754fn"]
 [ext_resource type="PackedScene" uid="uid://dagwl50mytxjc" path="res://Scenes/player.tscn" id="1_tumq0"]
 [ext_resource type="Texture2D" uid="uid://fbffg7umdlrq" path="res://Assets/Background/BG-sky.png" id="2_6phgx"]
 [ext_resource type="TileSet" uid="uid://b1i6i2exxglah" path="res://Assets/TileMap/TestSet.tres" id="2_k5f4k"]
@@ -138,32 +138,24 @@ size_flags_vertical = 0
 
 [node name="SpawnArea" parent="." instance=ExtResource("10_oqgf2")]
 position = Vector2(1256, 431)
-Used = true
 
 [node name="SpawnArea2" parent="." instance=ExtResource("10_oqgf2")]
 position = Vector2(751, 467)
-Used = true
 
 [node name="SpawnArea3" parent="." instance=ExtResource("10_oqgf2")]
 position = Vector2(1203, 494)
-Used = true
 
 [node name="SpawnArea4" parent="." instance=ExtResource("10_oqgf2")]
 position = Vector2(1740, 391)
-Used = true
 
 [node name="SpawnArea5" parent="." instance=ExtResource("10_oqgf2")]
 position = Vector2(1946, 513)
-Used = true
 
 [node name="SpawnArea6" parent="." instance=ExtResource("10_oqgf2")]
 position = Vector2(2377, 308)
-Used = true
 
 [node name="SpawnArea7" parent="." instance=ExtResource("10_oqgf2")]
 position = Vector2(2578, 383)
-Used = true
 
 [node name="SpawnArea8" parent="." instance=ExtResource("10_oqgf2")]
 position = Vector2(2437, 518)
-Used = true

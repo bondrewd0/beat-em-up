@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://sgwrda12g8yf"]
+[gd_scene load_steps=6 format=3 uid="uid://sgwrda12g8yf"]
 
 [ext_resource type="FontFile" uid="uid://c028ao3j0lp6a" path="res://Assets/Fonts/Merchant Copy.ttf" id="1_0gua7"]
-[ext_resource type="Script" uid="uid://c6q00fdssnxkx" path="res://Scenes/game_over_screen.gd" id="1_y8man"]
+[ext_resource type="Script" uid="uid://c6q00fdssnxkx" path="res://Scripts/game_over_screen.gd" id="1_y8man"]
 [ext_resource type="Theme" uid="uid://duhylbv7ogrcf" path="res://Assets/Themes/ButtonTheme.tres" id="2_jb6in"]
+[ext_resource type="Texture2D" uid="uid://doydjo4lyspne" path="res://Assets/Background/gameovertp.png" id="2_kk8k2"]
 
 [sub_resource type="Theme" id="Theme_jb6in"]
 default_font = ExtResource("1_0gua7")
@@ -18,6 +19,14 @@ script = ExtResource("1_y8man")
 [node name="Background" type="ColorRect" parent="."]
 layout_mode = 2
 color = Color(0.331267, 0.224478, 0.160815, 1)
+
+[node name="TextureRect" type="TextureRect" parent="Background"]
+texture_filter = 1
+layout_mode = 2
+offset_right = 1152.0
+offset_bottom = 648.0
+texture = ExtResource("2_kk8k2")
+expand_mode = 2
 
 [node name="Text" type="RichTextLabel" parent="Background"]
 layout_mode = 1

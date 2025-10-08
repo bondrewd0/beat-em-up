@@ -12,6 +12,10 @@ class_name Enemy
 @onready var floor_detection: CollisionShape2D = $FloorDetection
 @onready var collision_shape_2d: CollisionShape2D = $HitBox/CollisionShape2D
 @onready var collision_shape_2d2: CollisionShape2D = $AttackZone/CollisionShape2D
+@onready var enemy_hp_bar: EnemyHealth = $EnemyHPBar
+@onready var sfx: AudioStreamPlayer2D = $Sfx
+@onready var attacksfx: AudioStreamPlayer2D = $Attacksfx
+@onready var hitted_sfx: AudioStreamPlayer2D = $HittedSfx
 
 var knckback:Vector2=Vector2.ZERO
 var timeknockback=0.0
@@ -47,6 +51,7 @@ func stop():
 	if not dead:
 		print(1)
 		sprite.play("Idle")
+		sfx.stop()
 
 func attack_timeout():
 	#print(player_close)
@@ -61,6 +66,7 @@ func attack_timeout():
 		if not dead:
 			print(2)
 			sprite.play("Idle")
+			sfx.stop()
 
 func track_switch():
 	if not player_close:
@@ -72,8 +78,10 @@ func track_switch():
 			TrackTimer.wait_time=1
 			can_move=false
 			velocity=Vector2.ZERO
+			sfx.stop()
 		else:
 			sprite.play("Move")
+			sfx.play()
 			TrackTimer.wait_time=4
 			can_move=true
 		TrackTimer.start()
@@ -119,6 +127,7 @@ func move_to_target(delta:float):
 		flip_stuff(true)
 	if sprite.animation!="Move" and can_move:
 		sprite.play("Move")
+		sfx.play()
 	velocity=direction*Speed
 
 func _on_hit_box_area_entered(area: Area2D) -> void:
@@ -162,6 +171,7 @@ func get_knocked(delta:float):
 			tracking=true
 			TrackTimer.start()
 			sprite.play("Move")
+			sfx.play()
 		#print("knock done")
 
 func apply_damage():
@@ -177,7 +187,9 @@ func flip_stuff(flip:bool):
 		AttackZone.scale.x=1
 
 func take_damage():
+	hitted_sfx.play()
 	Health_Points-=1
+	
 	#print("Health: ",Health_Points)
 	if Health_Points<=0:
 		dead=true
@@ -196,11 +208,13 @@ func take_damage():
 		collision_shape_2d.set_deferred("disable",true)
 		collision_shape_2d2.set_deferred("disable",true)
 		sprite.play("Die")
-	
+	enemy_hp_bar.value=Health_Points
+	SignalBus.enemy_hit.emit(enemy_hp_bar)
 
 
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if sprite.animation=="Spawn":
+		enemy_hp_bar.show()
 		floor_detection.disabled=false
 		collision_shape_2d.disabled=false
 		collision_shape_2d2.disabled=false
@@ -217,6 +231,7 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 		else:
 			print(6)
 			sprite.play("Idle")
+			sfx.stop()
 	if sprite.animation=="Die":
 		after_spawn_timer.start()
 		await after_spawn_timer.timeout

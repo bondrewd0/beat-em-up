@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://byp0j73sd3bqs" path="res://Assets/Bars/PlayerBar.tres" id="1_2og1r"]
 [ext_resource type="Texture2D" uid="uid://di4ef8cjslpb" path="res://Assets/Bars/bar.png" id="2_k5148"]
-[ext_resource type="Script" uid="uid://kmhnhbg374x" path="res://Scenes/player_health_bar.gd" id="3_dsita"]
+[ext_resource type="Script" uid="uid://kmhnhbg374x" path="res://Scripts/player_health_bar.gd" id="3_dsita"]
 [ext_resource type="Texture2D" uid="uid://d1j36s8ikwb7g" path="res://Assets/Bars/healthbars_gemstones.png" id="3_ic8xp"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dsita"]

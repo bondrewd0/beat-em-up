@@ -6,6 +6,8 @@ class_name Player
 @onready var attack_1: Area2D = $Attackcolliders/Attack1
 @onready var attack_2: Area2D = $Attackcolliders/Attack2
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var attacksfx: AudioStreamPlayer2D = $Attacksfx
+@onready var hitted_sfx: AudioStreamPlayer2D = $HittedSfx
 
 @export var HP_Bar:TextureProgressBar=null
 @export var Speed:float=10
@@ -29,28 +31,34 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if dead:
+		return
 	var direction=Vector2(horizontal_movement,vertical_movement)
 	velocity=direction*Speed
 	if timeknockback>0.0:
 		get_knocked(delta)
 	if can_move:
+		if horizontal_movement==-1:
+			flip_stuff(true)
+		if horizontal_movement==1:
+			flip_stuff(false)
 		move_and_slide()
 
 
 func _input(event: InputEvent) -> void:
-	vertical_movement=Input.get_axis("Up","Down")
-	horizontal_movement=Input.get_axis("Left","Right")
+	
 	if event.is_action_released("Restart"):
 		SignalBus.restart.emit()
 	if event.is_action_pressed("Test"):
 		print("Testing")
 		SignalBus.level_completed.emit()
 		print("Testing complete")
+	if dead:
+		return
+	vertical_movement=Input.get_axis("Up","Down")
+	horizontal_movement=Input.get_axis("Left","Right")
 	if can_move:
-		if horizontal_movement==-1:
-			flip_stuff(true)
-		if horizontal_movement==1:
-			flip_stuff(false)
+		
 		if horizontal_movement!=0 or vertical_movement!=0:
 			if load_next_attack:
 				load_next_attack=false
@@ -66,6 +74,7 @@ func _input(event: InputEvent) -> void:
 		load_next_attack=true
 	if event.is_action_pressed("Attack") and can_attack:
 		can_move=false
+		attacksfx.play()
 		can_attack=false
 		attack_counter+=1
 		if sfx.playing:
@@ -82,6 +91,7 @@ func _on_sprite_animation_finished() -> void:
 	if sprite.animation=="Attack1":
 		if load_next_attack:
 			sprite.play("Attack2")
+			attacksfx.play()
 			attack_counter=0
 			attack_timer.start()
 			load_next_attack=false
@@ -96,6 +106,7 @@ func _on_sprite_animation_finished() -> void:
 	if sprite.animation=="Attack2":
 		if load_next_attack:
 			sprite.play("Attack1")
+			attacksfx.play()
 			attack_counter=0
 			attack_timer.start()
 			load_next_attack=false
@@ -122,6 +133,7 @@ func _on_sprite_animation_changed() -> void:
 		animation_player.play("TriggerAttack2")
 
 func take_damage(damage:int, source:Node2D):
+	hitted_sfx.play()
 	if sfx.playing:
 		sfx.stop()
 	var hit_dir=(global_position-source.global_position).normalized()

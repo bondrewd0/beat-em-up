@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://bc5dkj0kx8axl"]
 
-[ext_resource type="Script" uid="uid://sxnhuo22ookn" path="res://Scenes/spawn_area.gd" id="1_oamm6"]
+[ext_resource type="Script" uid="uid://sxnhuo22ookn" path="res://Scripts/spawn_area.gd" id="1_oamm6"]
 [ext_resource type="PackedScene" uid="uid://ck8mkjleef5or" path="res://Scenes/enemy.tscn" id="2_0tl3q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aache"]

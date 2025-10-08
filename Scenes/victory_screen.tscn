@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://c7q61yq1yerl7"]
+[gd_scene load_steps=6 format=3 uid="uid://c7q61yq1yerl7"]
 
-[ext_resource type="Script" uid="uid://678rs5u3qaow" path="res://Scenes/victory_screen.gd" id="1_mubwb"]
+[ext_resource type="Script" uid="uid://678rs5u3qaow" path="res://Scripts/victory_screen.gd" id="1_mubwb"]
 [ext_resource type="FontFile" uid="uid://c028ao3j0lp6a" path="res://Assets/Fonts/Merchant Copy.ttf" id="2_fmvqe"]
+[ext_resource type="Texture2D" uid="uid://ubbpmk4146oe" path="res://Assets/Background/victory tp.png" id="2_vrh3u"]
 [ext_resource type="PackedScene" uid="uid://dsr32av7bnpae" path="res://Scenes/MenuButton.tscn" id="3_fmvqe"]
 
 [sub_resource type="Theme" id="Theme_vrh3u"]
@@ -18,6 +19,16 @@ script = ExtResource("1_mubwb")
 [node name="Background" type="ColorRect" parent="."]
 layout_mode = 2
 color = Color(0.331267, 0.224478, 0.160815, 1)
+
+[node name="TextureRect" type="TextureRect" parent="Background"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_vrh3u")
+expand_mode = 1
 
 [node name="Text" type="RichTextLabel" parent="Background"]
 custom_minimum_size = Vector2(740, 101)

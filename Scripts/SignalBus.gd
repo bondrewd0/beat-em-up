@@ -6,3 +6,4 @@ signal change_level(level:PackedScene)
 signal restart
 signal player_dead
 signal level_completed
+signal enemy_hit(enemy_bar:EnemyHealth)
