@@ -22,6 +22,10 @@ boot_splash/minimum_display_time=300
 
 SignalBus="*res://Scripts/SignalBus.gd"
 
+[display]
+
+window/stretch/mode="viewport"
+
 [dotnet]
 
 project/assembly_name="Beat em up"

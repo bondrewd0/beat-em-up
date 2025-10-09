@@ -178,7 +178,7 @@ texture_filter = 1
 position = Vector2(-2.5, -19)
 scale = Vector2(-1, 1)
 sprite_frames = SubResource("SpriteFrames_vt4ob")
-animation = &"hit"
+animation = &"Spawn"
 autoplay = "Idle"
 
 [node name="HitBox" type="Area2D" parent="."]
